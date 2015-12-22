@@ -7,7 +7,7 @@ using namespace std;
 //9 groups for each of the 9 columns, 9 rows, and 9 squares in a Sudoku game
 class Sudoku{
 private:
-    
+    bool proceed; 
     //Representation of 9 Cells grouped together
     class Group{
         friend Sudoku;

@@ -13,45 +13,21 @@
 using namespace std;
 
 int main() {
-
-    Sudoku game("sudoku.txt");
-    game.solve();
+    string filename;
+    cout << "Hello, I'm Carl;\nI solve sudoku puzzles and let you know what level they are. The levels range from 1 to 3, easiest to hardest; \nPlease type in the name of the file of the sudoku you wish for me to solve; \nTo end the program simply type end;\n" << endl;
     
-    Sudoku game2("sudoku2.txt");
-    game2.solve();
-    
-    Sudoku game3("sudoku3.txt");
-    game3.solve();
-    
-    Sudoku game4("sudoku4.txt");
-    game4.solve();
-    
-   // Sudoku game5("sudoku5.txt");
-    //game5.solve();
-    
-    Sudoku game6("sudoku6.txt");
-    game6.solve();
-    
-    Sudoku game7("sudoku7.txt");
-    game7.solve();
-    
-    Sudoku game8("sudoku8.txt");
-    game8.solve();
-    
-    Sudoku game9("sudoku9.txt");
-    game9.solve();
-
-    //can't solve
-    Sudoku game10("sudoku11.txt");
-    game10.solve();
-  
-    Sudoku game11("sudoku12.txt");
-    game11.solve();
-    
- 
-   char * dir = getcwd(NULL, 0); // Platform-dependent, see reference link below
-    printf("Current dir: %s", dir);
-    
-     
+    cout << "Carl: I'm ready for the first sudoku;" << endl;
+    while(cin >> filename){
+        if(filename == "end"){
+            cout << "Carl: Bye!;" << endl;
+            break;
+        }
+        else{
+            Sudoku game(filename);
+            game.solve();
+        }
+        cout << "Carl: I'm ready for a sudoku to solve;" << endl;
+    }
 }
+
 

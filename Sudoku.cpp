@@ -52,6 +52,7 @@ void Sudoku::Group::add_cell(Cell* temp){
 }
 
 Sudoku::~Sudoku(){
+    if(!proceed) return;
     for(int i = 0; i < 81; i++){
         delete game[i];
     }
@@ -88,10 +89,12 @@ Sudoku::Sudoku(string file_name){
     ifstream filestream;
     filestream.open(file_name);
     if(!filestream.is_open()){
-        cout << "FAIL" << endl;
-        exit(1);
+        cout << "Carl: Please put in a correct filename;" << endl;
+        proceed = false;
+        return;
     }
     
+    proceed = true;
     int num_in;
     int row_n = 0;
     int index = 0;
@@ -804,12 +807,20 @@ void Sudoku::loop_all(bool change){
 
 void Sudoku::solve(){
     
+    if(!proceed){
+        return;
+    }
+    int level = 1;
+    
     loop_all(true);
     
     int num = 0;
   
     while(to_solve > 0 && num < 3){
             for(int i = 0; i < 9; i++){
+                if(level != 3){
+                    level = 2;
+                }
                 narrow_row(i);
                 narrow_col(i);
                 narrow_rs(i);
@@ -819,6 +830,7 @@ void Sudoku::solve(){
         loop_all(true);
     
         if(to_solve > 0){
+            level = 3;
             for(int i = 0; i < 9; i++){
                 square(i);
             }
@@ -844,10 +856,15 @@ void Sudoku::solve(){
     }
     
     else{
-        cout << "Carl: Got it!" << endl;
+        cout << "Carl: Got it! Level " << level << endl;
         print();
     }
 }
+
+
+
+
+
 
 
 
